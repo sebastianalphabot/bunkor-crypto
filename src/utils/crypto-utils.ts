@@ -85,17 +85,15 @@ export function hexToArrayBuffer(hex: string): Uint8Array {
  * @returns Hex-encoded hash
  */
 export async function sha256(data: string | ArrayBuffer | Uint8Array): Promise<string> {
-  let buffer: ArrayBuffer;
+  let buffer: string | ArrayBuffer | Uint8Array;
 
   if (typeof data === 'string') {
     buffer = new TextEncoder().encode(data);
-  } else if (data instanceof Uint8Array) {
-    buffer = data.buffer;
   } else {
     buffer = data;
   }
 
-  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', buffer as BufferSource);
   return arrayBufferToHex(hashBuffer);
 }
 
