@@ -38,8 +38,8 @@
       "optional": true
     }
   },
-  "dependencies": {
-    "mlkem": "^0.1.0"
+  "optionalDependencies": {
+    "mlkem": "^2.5.0"
   },
   "devDependencies": {
     "@types/jest": "^29.0.0",
