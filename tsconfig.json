@@ -15,8 +15,8 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "removeComments": false,
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
+  "exclude": ["node_modules", "dist"]
 }
