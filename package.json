@@ -1,0 +1,49 @@
+{
+  "name": "@bunkor/crypto",
+  "version": "0.1.0",
+  "description": "Zero-knowledge cryptographic utilities for secure file and form encryption",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src"
+  },
+  "keywords": [
+    "encryption",
+    "cryptography",
+    "zero-knowledge",
+    "aes-gcm",
+    "kyber",
+    "rsa-oaep",
+    "pbkdf2",
+    "secure-forms"
+  ],
+  "author": "Bunkor",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bunkor/bunkor-crypto"
+  },
+  "peerDependencies": {
+    "@angular/core": "^21.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/core": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "mlkem": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  }
+}
