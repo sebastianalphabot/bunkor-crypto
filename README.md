@@ -111,15 +111,100 @@ const { blob, kdfParams } = await formCrypto.encryptPrivateKey(
 );
 ```
 
+## Bunkor Integration
+
+This library provides client-side encryption that integrates seamlessly with Bunkor secure storage.
+
+### How It Works
+
+```
+User App / Frontend
+    ↓
+@bunkor/crypto (Client-side encryption)
+    ├─ Encrypts file with AES-256-GCM
+    ├─ Derives key from password (PBKDF2)
+    └─ Generates random salt & IV
+    ↓
+Bunkor API (https://api.bunkor.io)
+    ├─ Receives encrypted file
+    ├─ Stores encrypted data (never sees plaintext)
+    ├─ Stores salt & IV metadata
+    └─ Returns file ID & encryption metadata
+    ↓
+User retrieves file later
+    ├─ Downloads encrypted file + metadata
+    ├─ @bunkor/crypto decrypts with password
+    └─ Original file recovered
+```
+
+### Communication Flow
+
+**Upload:**
+1. User selects file and enters password
+2. `BunkorClient.uploadEncrypted()` encrypts locally
+3. Only encrypted file sent to Bunkor API
+4. Server stores: encrypted blob, salt, IV, algorithm
+5. Returns file ID for later access
+
+**Download:**
+1. App requests file by ID from Bunkor API
+2. Server returns: encrypted blob + metadata (salt, IV, algorithm)
+3. `BunkorClient.downloadDecrypted()` decrypts locally
+4. User gets original file, server never decrypts
+
+### Bunkor Links
+
+- **Bunkor Frontend:** https://beta.bunkor.com
+- **API Documentation:** https://docs.bunkor.com
+- **API Endpoint:** https://api.bunkor.io
+
+### Example: Full Bunkor Workflow
+
+```typescript
+import { BunkorClient } from '@bunkor/crypto';
+
+// Initialize with Bunkor credentials
+const bunkor = new BunkorClient({
+  apiUrl: 'https://api.bunkor.io',
+  apiToken: process.env.BUNKOR_TOKEN,
+});
+
+// Upload to Bunkor (encrypted)
+const result = await bunkor.uploadEncrypted(
+  userFile,
+  userPassword,
+  'AES-256-GCM'
+);
+console.log('File ID:', result.fileId); // Store this
+
+// Later: Download from Bunkor (decrypted)
+const decrypted = await bunkor.downloadDecrypted(
+  result.fileId,
+  userPassword,
+  (progress) => console.log(`${progress}%`)
+);
+
+// Bunkor API never sees unencrypted content
+// All encryption/decryption happens in browser
+```
+
+### Security Model
+
+- Bunkor stores encrypted data (cannot read without decryption)
+- Decryption key derived from user password (only user knows it)
+- Server enforces access control on encrypted files
+- Audit trail logs who accessed encrypted files and when
+- User can safely share file IDs; decryption requires correct password
+
 ## Supported Algorithms
 
 ### Standard Encryption
 
 | Algorithm | Key Size | Mode | IV Size | Speed | Security |
 |-----------|----------|------|---------|-------|----------|
-| AES-256-GCM | 256-bit | Authenticated | 96-bit | Fast | ⭐⭐⭐⭐⭐ (Recommended) |
-| AES-256-CBC | 256-bit | Unauthenticated | 128-bit | Fast | ⭐⭐⭐⭐ (Legacy) |
-| AES-256-CTR | 256-bit | Stream | 128-bit | Fast | ⭐⭐⭐⭐ |
+| AES-256-GCM | 256-bit | Authenticated | 96-bit | Fast | Recommended |
+| AES-256-CBC | 256-bit | Unauthenticated | 128-bit | Fast | Legacy |
+| AES-256-CTR | 256-bit | Stream | 128-bit | Fast | Optional |
 
 ### Post-Quantum Hybrid
 
