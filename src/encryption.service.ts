@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 // ML-KEM types
 interface MlKemInstance {
   generateKeyPair(): Promise<[Uint8Array, Uint8Array]>;
@@ -47,9 +45,6 @@ export interface DecryptionParams {
  * DEPENDENCIES:
  *   pnpm install mlkem
  */
-@Injectable({
-  providedIn: 'root'
-})
 export class EncryptionService {
 
   private readonly PBKDF2_ITERATIONS = 100000;

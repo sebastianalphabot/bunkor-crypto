@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { EncFileJson, KdfParams } from './models/secure-forms.models';
 
 /**
@@ -7,7 +6,6 @@ import { EncFileJson, KdfParams } from './models/secure-forms.models';
  * Owns ALL Web Crypto API calls for secure-form encryption.
  * No HTTP calls. No business logic. CryptoKey objects never leave this service as raw bytes.
  */
-@Injectable({ providedIn: 'root' })
 export class SecureFormCryptoService {
 
   // ─── CEK (Content Encryption Key) ────────────────────────────────────────

@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { IEncryptionStrategy } from './encryption-strategy.interface';
 import { AesGcmStrategy } from './strategies/aes-gcm-strategy';
 import { AesCbcStrategy } from './strategies/aes-cbc-strategy';
@@ -59,9 +58,6 @@ export interface AlgorithmInfo {
  * - Strategy Pattern: Different encryption algorithms
  * - Factory Pattern: Creates appropriate strategy based on algorithm
  */
-@Injectable({
-  providedIn: 'root'
-})
 export class EnhancedEncryptionService {
   private readonly strategies = new Map<EncryptionAlgorithm, IEncryptionStrategy>();
 

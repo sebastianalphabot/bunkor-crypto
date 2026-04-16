@@ -1,12 +1,7 @@
-import { Injectable } from '@angular/core';
-
 /**
  * Cryptographic utilities for zero-knowledge password handling
  * Used for PBKDF2 hashing before sending to backend
  */
-@Injectable({
-  providedIn: 'root'
-})
 export class CryptoService {
 
   /**

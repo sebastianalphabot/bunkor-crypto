@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 /**
  * Keyring Encryption Service
  *
@@ -11,9 +9,6 @@ import { Injectable } from '@angular/core';
  * - Salt: 32 bytes (256 bits)
  * - IV: 12 bytes (96 bits) for GCM
  */
-@Injectable({
-  providedIn: 'root'
-})
 export class KeyringEncryptionService {
   private readonly PBKDF2_ITERATIONS = 310000;
   private readonly SALT_LENGTH = 32;
