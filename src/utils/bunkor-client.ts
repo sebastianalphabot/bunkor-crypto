@@ -269,13 +269,14 @@ export class BunkorClient {
    * Internal: Generate IV for encryption algorithm
    */
   private generateIv(algorithm: EncryptionAlgorithm): string {
-    const ivSize = {
+    const ivSizeMap: Record<string, number> = {
       'AES-256-GCM': 12,
       'AES-256-CBC': 16,
       'AES-256-CTR': 16,
       'Kyber-768-AES': 12,
       'Kyber-1024-AES': 12,
-    }[algorithm];
+    };
+    const ivSize = ivSizeMap[algorithm] ?? 12;
 
     const array = new Uint8Array(ivSize);
     crypto.getRandomValues(array);
@@ -313,11 +314,14 @@ export class BunkorClient {
       console.log(`[Bunkor] ${options.method || 'GET'} ${endpoint}`);
     }
 
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), this.config.timeout);
     const response = await fetch(url, {
       ...options,
       headers,
-      timeout: this.config.timeout,
+      signal: controller.signal,
     });
+    clearTimeout(timer);
 
     if (!response.ok) {
       const error = await response.text();

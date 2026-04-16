@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EncFileJson, KdfParams } from '../models/secure-forms.models';
+import { EncFileJson, KdfParams } from './models/secure-forms.models';
 
 /**
  * SecureFormCryptoService

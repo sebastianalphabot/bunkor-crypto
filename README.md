@@ -165,7 +165,7 @@ import { BunkorClient } from '@bunkor/crypto';
 
 // Initialize with Bunkor credentials
 const bunkor = new BunkorClient({
-  apiUrl: 'https://api.bunkor.io',
+  apiUrl: 'https://lockbox-app-415633403824.us-central1.run.app',
   apiToken: process.env.BUNKOR_TOKEN,
 });
 

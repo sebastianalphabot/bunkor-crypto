@@ -43,10 +43,10 @@ export interface BunkorConfig {
  * Override with your environment-specific settings
  */
 export const DEFAULT_BUNKOR_CONFIG: Partial<BunkorConfig> = {
-  apiUrl: process.env['BUNKOR_API_URL'] || 'https://api.bunkor.io',
+  apiUrl: 'https://lockbox-app-415633403824.us-central1.run.app',
   timeout: 30000,
   chunkSize: 5 * 1024 * 1024, // 5MB chunks
-  debug: process.env['BUNKOR_DEBUG'] === 'true',
+  debug: false,
 };
 
 /**

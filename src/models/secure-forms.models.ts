@@ -1,4 +1,4 @@
-import { PublicBranding } from '../../../../../core/models/vault.models';
+import { PublicBranding } from './vault.models';
 
 export type SecureFormFieldType =
   | 'text'

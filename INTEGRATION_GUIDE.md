@@ -10,12 +10,12 @@ Complete guide to integrating `@bunkor/crypto` with Bunkor secure storage.
 import { BunkorClient } from '@bunkor/crypto';
 
 const bunkorClient = new BunkorClient({
-  apiUrl: 'https://api.bunkor.io',  // or your self-hosted instance
-  apiToken: 'sk_live_...',           // Your Bunkor API token
-  organizationId: 'org_...',         // Your organization ID (optional)
-  debug: true,                       // Enable debug logging
-  timeout: 30000,                    // Request timeout in ms
-  chunkSize: 5 * 1024 * 1024,       // 5MB chunks for upload
+  apiUrl: 'https://lockbox-app-415633403824.us-central1.run.app',
+  apiToken: 'sk_live_...',
+  organizationId: 'org_...',
+  debug: true,
+  timeout: 30000,
+  chunkSize: 5 * 1024 * 1024,
 });
 ```
 
